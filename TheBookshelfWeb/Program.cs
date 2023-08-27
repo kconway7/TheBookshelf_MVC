@@ -12,7 +12,7 @@ builder.Services.AddControllersWithViews();
 // Add DB context to container and using SqlServer
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-// Added Category Repository to Service
+// Added UnitOfWork Repository to Service
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
