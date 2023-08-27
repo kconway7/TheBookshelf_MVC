@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TheBookshelfWeb.Data;
-using TheBookshelfWeb.Models;
+using TheBookshelf.Models;
+using TheBookshelfWeb.DataAccess.Data;
 
 namespace TheBookshelfWeb.Controllers
 {
@@ -95,7 +95,8 @@ namespace TheBookshelfWeb.Controllers
         {
             Category? obj = _db.Categories.Find(id);
 
-            if (obj == null){
+            if (obj == null)
+            {
                 return NotFound();
             }
 

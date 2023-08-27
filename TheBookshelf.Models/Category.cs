@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace TheBookshelfWeb.Models
+namespace TheBookshelf.Models
 {
     public class Category
     {
         [Key]
         public int Id { get; set; }
         [Required]
-        [MaxLength(30)] 
+        [MaxLength(30)]
         [DisplayName("Category Name")]
         public string Name { get; set; }
         [DisplayName("Display Order")]
