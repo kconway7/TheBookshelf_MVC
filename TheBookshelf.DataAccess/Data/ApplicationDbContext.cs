@@ -33,6 +33,8 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price = 27,
                     Price50 = 24,
                     Price100 = 21,
+                    CategoryId = 1,
+                    ImageUrl = "",
                 },
                 new Product
                 {
@@ -45,6 +47,8 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price = 7,
                     Price50 = 6,
                     Price100 = 5.5,
+                    CategoryId = 2,
+                    ImageUrl = "",
                 },
                 new Product
                 {
@@ -57,6 +61,8 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price = 32,
                     Price50 = 28,
                     Price100 = 25,
+                    CategoryId = 1,
+                    ImageUrl = "",
                 },
                 new Product
                 {
@@ -69,6 +75,8 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price = 15,
                     Price50 = 14,
                     Price100 = 12,
+                    CategoryId = 3,
+                    ImageUrl = "",
                 },
                 new Product
                 {
@@ -81,6 +89,8 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price = 16,
                     Price50 = 14,
                     Price100 = 11,
+                    CategoryId = 1,
+                    ImageUrl = "",
                 },
                 new Product
                 {
@@ -93,6 +103,8 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price = 27,
                     Price50 = 25,
                     Price100 = 22,
+                    CategoryId = 1,
+                    ImageUrl = "",
                 },
                 new Product
                 {
@@ -105,6 +117,8 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price = 20,
                     Price50 = 18,
                     Price100 = 17,
+                    CategoryId = 3,
+                    ImageUrl = "",
                 },
                 new Product
                 {
@@ -117,6 +131,8 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price = 11,
                     Price50 = 10,
                     Price100 = 9,
+                    CategoryId = 2,
+                    ImageUrl = "",
                 }
                 );
         }

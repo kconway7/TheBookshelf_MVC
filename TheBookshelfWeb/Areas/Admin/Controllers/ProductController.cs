@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using TheBookshelf.DataAccess.Repository.IRepository;
 using TheBookshelf.Models;
+using TheBookshelf.Models.ViewModels;
 
 namespace TheBookshelfWeb.Areas.Admin.Controllers
 {
@@ -17,27 +19,41 @@ namespace TheBookshelfWeb.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<Product> objProductList = _unitOfWork.Product.GetAll().ToList();
+
             return View(objProductList);
         }
 
         public IActionResult Create()
         {
-            return View();
+            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem(u.Name, u.Id.ToString()));
+
+            //ViewBag.categoryList = CategoryList;            
+            //ViewData["CategoryList"] = CategoryList;
+            ProductVM productVM = new()
+            {
+                Product = new Product(),
+                CategoryList = CategoryList
+            };
+
+            return View(productVM);
         }
 
         [HttpPost]
-        public IActionResult Create(Product obj)
+        public IActionResult Create(ProductVM productVM)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Product.Add(obj);
+                _unitOfWork.Product.Add(productVM.Product);
                 _unitOfWork.Save();
                 TempData["success"] = "Product created successfully";
                 return RedirectToAction("Index");
             }
+            else
+            {
+                productVM.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem(u.Name, u.Id.ToString()));
 
-            return View();
-
+                return View(productVM);
+            }
         }
 
         public IActionResult Edit(int? id)
