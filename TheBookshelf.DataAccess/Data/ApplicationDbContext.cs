@@ -18,7 +18,12 @@ namespace TheBookshelfWeb.DataAccess.Data
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Action", DisplayOrder = 1 },
                 new Category { Id = 2, Name = "Sci-Fi", DisplayOrder = 2 },
-                new Category { Id = 3, Name = "History", DisplayOrder = 3 }
+                new Category { Id = 3, Name = "History", DisplayOrder = 3 },
+                new Category { Id = 4, Name = "Fantasy", DisplayOrder = 4 },
+                new Category { Id = 5, Name = "Horror", DisplayOrder = 5 },
+                new Category { Id = 6, Name = "Romance", DisplayOrder = 6 },
+                new Category { Id = 7, Name = "Mystery", DisplayOrder = 7 },
+                new Category { Id = 8, Name = "Drama", DisplayOrder = 8 }
                 );
 
             modelBuilder.Entity<Product>().HasData(
@@ -33,7 +38,7 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price = 27,
                     Price50 = 24,
                     Price100 = 21,
-                    CategoryId = 1,
+                    CategoryId = 5,
                     ImageUrl = "",
                 },
                 new Product
@@ -47,7 +52,7 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price = 7,
                     Price50 = 6,
                     Price100 = 5.5,
-                    CategoryId = 2,
+                    CategoryId = 4,
                     ImageUrl = "",
                 },
                 new Product
@@ -61,7 +66,7 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price = 32,
                     Price50 = 28,
                     Price100 = 25,
-                    CategoryId = 1,
+                    CategoryId = 4,
                     ImageUrl = "",
                 },
                 new Product
@@ -75,7 +80,7 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price = 15,
                     Price50 = 14,
                     Price100 = 12,
-                    CategoryId = 3,
+                    CategoryId = 4,
                     ImageUrl = "",
                 },
                 new Product
@@ -89,7 +94,7 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price = 16,
                     Price50 = 14,
                     Price100 = 11,
-                    CategoryId = 1,
+                    CategoryId = 6,
                     ImageUrl = "",
                 },
                 new Product
@@ -103,7 +108,7 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price = 27,
                     Price50 = 25,
                     Price100 = 22,
-                    CategoryId = 1,
+                    CategoryId = 4,
                     ImageUrl = "",
                 },
                 new Product
@@ -117,7 +122,7 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price = 20,
                     Price50 = 18,
                     Price100 = 17,
-                    CategoryId = 3,
+                    CategoryId = 7,
                     ImageUrl = "",
                 },
                 new Product
@@ -131,7 +136,7 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price = 11,
                     Price50 = 10,
                     Price100 = 9,
-                    CategoryId = 2,
+                    CategoryId = 8,
                     ImageUrl = "",
                 }
                 );

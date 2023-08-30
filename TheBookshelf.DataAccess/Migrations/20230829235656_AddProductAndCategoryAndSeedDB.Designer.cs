@@ -11,8 +11,8 @@ using TheBookshelfWeb.DataAccess.Data;
 namespace TheBookshelf.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230827224601_AddProductAndSeedToDB")]
-    partial class AddProductAndSeedToDB
+    [Migration("20230829235656_AddProductAndCategoryAndSeedDB")]
+    partial class AddProductAndCategoryAndSeedDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,6 +62,36 @@ namespace TheBookshelf.DataAccess.Migrations
                             Id = 3,
                             DisplayOrder = 3,
                             Name = "History"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DisplayOrder = 4,
+                            Name = "Fantasy"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DisplayOrder = 5,
+                            Name = "Horror"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DisplayOrder = 6,
+                            Name = "Romance"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            DisplayOrder = 7,
+                            Name = "Mystery"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            DisplayOrder = 8,
+                            Name = "Drama"
                         });
                 });
 
@@ -77,11 +107,18 @@ namespace TheBookshelf.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ISBN")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -103,6 +140,8 @@ namespace TheBookshelf.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Products");
 
                     b.HasData(
@@ -110,8 +149,10 @@ namespace TheBookshelf.DataAccess.Migrations
                         {
                             Id = 1,
                             Author = "Stephen King",
+                            CategoryId = 5,
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus accumsan nulla, non ultrices sem. Donec at felis ut turpis condimentum elementum.",
                             ISBN = "9788556511928",
+                            ImageUrl = "",
                             ListPrice = 30.0,
                             Price = 27.0,
                             Price100 = 21.0,
@@ -122,8 +163,10 @@ namespace TheBookshelf.DataAccess.Migrations
                         {
                             Id = 2,
                             Author = "Robert Jordan",
+                            CategoryId = 4,
                             Description = "Suspendisse eu magna vitae ex consequat placerat. Morbi vel pretium nunc, in imperdiet dui...",
                             ISBN = "0812511816",
+                            ImageUrl = "",
                             ListPrice = 8.0,
                             Price = 7.0,
                             Price100 = 5.5,
@@ -134,8 +177,10 @@ namespace TheBookshelf.DataAccess.Migrations
                         {
                             Id = 3,
                             Author = "George R. R. Martin",
+                            CategoryId = 4,
                             Description = "Donec eu dapibus arcu. Praesent egestas, sem sed auctor malesuada, sapien ligula dignissim urna, sed feugiat ante massa id nisl.",
                             ISBN = "0553808044",
+                            ImageUrl = "",
                             ListPrice = 35.0,
                             Price = 32.0,
                             Price100 = 25.0,
@@ -146,8 +191,10 @@ namespace TheBookshelf.DataAccess.Migrations
                         {
                             Id = 4,
                             Author = "Stephen King",
+                            CategoryId = 4,
                             Description = "Fusce accumsan orci diam, sed commodo massa gravida id. Nunc ut ante cursus, scelerisque nisl sit amet, ornare eros.",
                             ISBN = "9781668002179",
+                            ImageUrl = "",
                             ListPrice = 17.0,
                             Price = 15.0,
                             Price100 = 12.0,
@@ -158,8 +205,10 @@ namespace TheBookshelf.DataAccess.Migrations
                         {
                             Id = 5,
                             Author = "Hannah Nicole Maehrer",
+                            CategoryId = 6,
                             Description = "Ut mattis placerat odio, et lobortis ipsum volutpat ut. Nullam laoreet metus eu urna pellentesque auctor. Pellentesque et diam nec nisl dictum tincidunt.",
                             ISBN = "9788556511928",
+                            ImageUrl = "",
                             ListPrice = 17.0,
                             Price = 16.0,
                             Price100 = 11.0,
@@ -170,8 +219,10 @@ namespace TheBookshelf.DataAccess.Migrations
                         {
                             Id = 6,
                             Author = "Sarah J. Maas",
+                            CategoryId = 4,
                             Description = "Sed maximus purus eget libero placerat, accumsan viverra nisl pulvinar. Ut arcu nulla, feugiat at metus vel, volutpat iaculis quam.",
                             ISBN = "9781639732869",
+                            ImageUrl = "",
                             ListPrice = 29.0,
                             Price = 27.0,
                             Price100 = 22.0,
@@ -182,8 +233,10 @@ namespace TheBookshelf.DataAccess.Migrations
                         {
                             Id = 7,
                             Author = "William Kent Krueger",
+                            CategoryId = 7,
                             Description = "Donec ipsum mauris, rutrum ut arcu in, imperdiet euismod orci. Fusce et odio quis tellus feugiat luctus.",
                             ISBN = "9781668047903",
+                            ImageUrl = "",
                             ListPrice = 21.0,
                             Price = 20.0,
                             Price100 = 17.0,
@@ -194,14 +247,27 @@ namespace TheBookshelf.DataAccess.Migrations
                         {
                             Id = 8,
                             Author = "Harper Lee",
+                            CategoryId = 8,
                             Description = "Curabitur sodales sodales lectus, vel feugiat arcu aliquam eget. Pellentesque eu turpis eu nunc aliquam dignissim.",
                             ISBN = "0446310786",
+                            ImageUrl = "",
                             ListPrice = 13.0,
                             Price = 11.0,
                             Price100 = 9.0,
                             Price50 = 10.0,
                             Title = "To Kill a Mockingbird"
                         });
+                });
+
+            modelBuilder.Entity("TheBookshelf.Models.Product", b =>
+                {
+                    b.HasOne("TheBookshelf.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }
