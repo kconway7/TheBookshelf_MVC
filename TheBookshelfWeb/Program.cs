@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TheBookshelf.DataAccess.Repository;
 using TheBookshelf.DataAccess.Repository.IRepository;
@@ -12,6 +13,8 @@ builder.Services.AddControllersWithViews();
 // Add DB context to container and using SqlServer
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
 // Added UnitOfWork Repository to Service
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -33,6 +36,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
