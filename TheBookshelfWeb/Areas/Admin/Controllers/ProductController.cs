@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TheBookshelf.DataAccess.Repository.IRepository;
 using TheBookshelf.Models;
 using TheBookshelf.Models.ViewModels;
+using TheBookshelf.Utility;
 
 namespace TheBookshelfWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class ProductController : Controller
     {
 
@@ -133,4 +136,6 @@ namespace TheBookshelfWeb.Areas.Admin.Controllers
         #endregion
 
     }
+
+
 }
