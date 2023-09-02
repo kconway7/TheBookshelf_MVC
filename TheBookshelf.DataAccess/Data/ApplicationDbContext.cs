@@ -14,6 +14,7 @@ namespace TheBookshelfWeb.DataAccess.Data
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Company> Companies { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -29,6 +30,12 @@ namespace TheBookshelfWeb.DataAccess.Data
                 new Category { Id = 6, Name = "Romance", DisplayOrder = 6 },
                 new Category { Id = 7, Name = "Mystery", DisplayOrder = 7 },
                 new Category { Id = 8, Name = "Drama", DisplayOrder = 8 }
+                );
+
+            modelBuilder.Entity<Company>().HasData(
+                new Company { Id = 1, Name = "Tech Solution", StreetAddress = "123 Tech St", City = "Tech City", PostalCode = "12121", State = "IL", PhoneNumber = "1112223333" },
+                new Company { Id = 2, Name = "Vivid Books", StreetAddress = "999 Vid St", City = "Vid City", PostalCode = "56565", State = "NY", PhoneNumber = "4445556666" },
+                new Company { Id = 3, Name = "Readers Club", StreetAddress = "999 Main St", City = "Test City", PostalCode = "44003", State = "CA", PhoneNumber = "7778889999" }
                 );
 
             modelBuilder.Entity<Product>().HasData(
