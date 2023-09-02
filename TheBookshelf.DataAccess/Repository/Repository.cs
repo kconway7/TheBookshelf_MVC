@@ -23,9 +23,18 @@ public class Repository<T> : IRepository<T> where T : class
         dbset.Add(entity);
     }
 
-    public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null)
+    public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false)
     {
-        IQueryable<T> query = dbset;
+        IQueryable<T> query;
+        if (tracked)
+        {
+            query = dbset;
+        }
+        else
+        {
+            query = dbset.AsNoTracking();
+        }
+
         query = query.Where(filter);
 
         if (!String.IsNullOrEmpty(includeProperties))
