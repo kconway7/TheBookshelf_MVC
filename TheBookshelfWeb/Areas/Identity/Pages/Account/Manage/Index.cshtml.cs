@@ -2,13 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
+using TheBookshelf.DataAccess.Repository.IRepository;
+using TheBookshelf.Models;
 
 namespace TheBookshelfWeb.Areas.Identity.Pages.Account.Manage
 {
@@ -16,11 +15,14 @@ namespace TheBookshelfWeb.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IUnitOfWork _unitOfWork;
 
         public IndexModel(
+            IUnitOfWork unitOfWork,
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager)
         {
+            _unitOfWork = unitOfWork;
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -58,6 +60,7 @@ namespace TheBookshelfWeb.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+            public ApplicationUser ApplicationUser { get; set; }
         }
 
         private async Task LoadAsync(IdentityUser user)
@@ -66,9 +69,11 @@ namespace TheBookshelfWeb.Areas.Identity.Pages.Account.Manage
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             Username = userName;
+            ApplicationUser applicationUser = _unitOfWork.ApplicationUser.Get(u => u.Email == user.UserName);
 
             Input = new InputModel
             {
+                ApplicationUser = applicationUser,
                 PhoneNumber = phoneNumber
             };
         }
@@ -114,5 +119,9 @@ namespace TheBookshelfWeb.Areas.Identity.Pages.Account.Manage
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
         }
+
+        //public IActionResult OnPost(ApplicationUser applicationUser)
+        //{
+        //}
     }
 }
