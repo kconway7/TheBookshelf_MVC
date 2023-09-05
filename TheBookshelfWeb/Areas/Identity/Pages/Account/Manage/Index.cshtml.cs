@@ -51,6 +51,8 @@ namespace TheBookshelfWeb.Areas.Identity.Pages.Account.Manage
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
+        /// 
+        [BindProperties]
         public class InputModel
         {
             /// <summary>
@@ -61,6 +63,7 @@ namespace TheBookshelfWeb.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
             public ApplicationUser ApplicationUser { get; set; }
+            public string userId { get; set; }
         }
 
         private async Task LoadAsync(IdentityUser user)
@@ -69,11 +72,12 @@ namespace TheBookshelfWeb.Areas.Identity.Pages.Account.Manage
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             Username = userName;
-            ApplicationUser applicationUser = _unitOfWork.ApplicationUser.Get(u => u.Email == user.UserName);
+            ApplicationUser appUser = (ApplicationUser)await _userManager.FindByIdAsync(user.Id);
 
             Input = new InputModel
             {
-                ApplicationUser = applicationUser,
+                userId = user.Id,
+                ApplicationUser = appUser,
                 PhoneNumber = phoneNumber
             };
         }
@@ -90,38 +94,62 @@ namespace TheBookshelfWeb.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        /* public async Task<IActionResult> OnPostAsync()
+         {
+             var user = await _userManager.GetUserAsync(User);
+             if (user == null)
+             {
+                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+             }
+
+             if (!ModelState.IsValid)
+             {
+                 await LoadAsync(user);
+                 return Page();
+             }
+
+             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+             if (Input.PhoneNumber != phoneNumber)
+             {
+                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+                 if (!setPhoneResult.Succeeded)
+                 {
+                     StatusMessage = "Unexpected error when trying to set phone number.";
+                     return RedirectToPage();
+                 }
+             }
+
+             await _signInManager.RefreshSignInAsync(user);
+
+             return RedirectToPage();
+         }*/
+
+        async public Task<IActionResult> OnPost()
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
+
+            ApplicationUser appUser = (ApplicationUser)await _userManager.FindByIdAsync(Input.userId);
+            if (appUser != null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                appUser.Name = Input.ApplicationUser.Name;
+                appUser.PhoneNumber = Input.ApplicationUser.PhoneNumber;
+                appUser.StreetAddress = Input.ApplicationUser.StreetAddress;
+                appUser.City = Input.ApplicationUser.City;
+                appUser.PostalCode = Input.ApplicationUser.PostalCode;
+                appUser.State = Input.ApplicationUser.State;
+                StatusMessage = "Your profile has been updated";
+                await _userManager.UpdateAsync(appUser);
+            }
+            else
+            {
+                StatusMessage = "Error updating profile";
             }
 
-            if (!ModelState.IsValid)
-            {
-                await LoadAsync(user);
-                return Page();
-            }
-
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
-            {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
-                    return RedirectToPage();
-                }
-            }
-
-            await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
             return RedirectToPage();
+
         }
 
-        //public IActionResult OnPost(ApplicationUser applicationUser)
-        //{
-        //}
+
+
+
     }
 }

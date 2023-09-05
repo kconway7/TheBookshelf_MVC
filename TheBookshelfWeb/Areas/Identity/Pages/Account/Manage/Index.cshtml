@@ -10,15 +10,41 @@
 <div class="row">
     <div class="col-md-6">
         <form id="profile-form" method="post">
+            <input asp-for="Input.userId" hidden />
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
                 <input asp-for="Username" class="form-control" placeholder="Please choose your username." disabled />
                 <label asp-for="Username" class="form-label"></label>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.PhoneNumber" class="form-control border-3 shadow-sm" placeholder="Please enter your phone number."/>
+                <input asp-for="Input.ApplicationUser.Name" class="form-control border-3 shadow-sm" placeholder="Please enter your phone number." />
+                <label asp-for="Input.ApplicationUser.Name" class="form-label"></label>
+                <span asp-validation-for="Input.ApplicationUser.Name" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.ApplicationUser.PhoneNumber" class="form-control border-3 shadow-sm" placeholder="Please enter your phone number."/>
                 <label asp-for="Input.PhoneNumber" class="form-label"></label>
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.ApplicationUser.StreetAddress" class="form-control border-3 shadow-sm" placeholder="Please enter your phone number." />
+                <label asp-for="Input.ApplicationUser.StreetAddress" class="form-label"></label>
+                <span asp-validation-for="Input.ApplicationUser.StreetAddress" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.ApplicationUser.City" class="form-control border-3 shadow-sm" placeholder="Please enter your phone number." />
+                <label asp-for="Input.ApplicationUser.City" class="form-label"></label>
+                <span asp-validation-for="Input.ApplicationUser.City" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.ApplicationUser.PostalCode" class="form-control border-3 shadow-sm" placeholder="Please enter your phone number." />
+                <label asp-for="Input.ApplicationUser.PostalCode" class="form-label"></label>
+                <span asp-validation-for="Input.ApplicationUser.PostalCode" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.ApplicationUser.State" class="form-control border-3 shadow-sm" placeholder="Please enter your phone number." />
+                <label asp-for="Input.ApplicationUser.State" class="form-label"></label>
+                <span asp-validation-for="Input.ApplicationUser.State" class="text-danger"></span>
             </div>
             <button id="update-profile-button" type="submit" class="w-100 btn rounded-2 btn-primary">Save</button>
              @* <a asp-controller="Update" class="w-100 btn rounded-2 btn-primary">Save</a>  *@
