@@ -28,6 +28,11 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LogoutPath = $"/Identity/Account/Logout";
     options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
 });
+builder.Services.AddAuthentication().AddGoogle(option =>
+{
+    option.ClientId = "1098554166825-kvrqf7b365f0u5j73cmr1enk3uib9pm7.apps.googleusercontent.com";
+    option.ClientSecret = "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";
+});
 
 //Configure sessions
 builder.Services.AddDistributedMemoryCache();
