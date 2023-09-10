@@ -54,7 +54,6 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price50 = 24,
                     Price100 = 21,
                     CategoryId = 5,
-                    ImageUrl = "",
                 },
                 new Product
                 {
@@ -68,7 +67,6 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price50 = 6,
                     Price100 = 5.5,
                     CategoryId = 4,
-                    ImageUrl = "",
                 },
                 new Product
                 {
@@ -82,7 +80,6 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price50 = 28,
                     Price100 = 25,
                     CategoryId = 4,
-                    ImageUrl = "",
                 },
                 new Product
                 {
@@ -96,7 +93,6 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price50 = 14,
                     Price100 = 12,
                     CategoryId = 4,
-                    ImageUrl = "",
                 },
                 new Product
                 {
@@ -110,7 +106,6 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price50 = 14,
                     Price100 = 11,
                     CategoryId = 6,
-                    ImageUrl = "",
                 },
                 new Product
                 {
@@ -124,7 +119,6 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price50 = 25,
                     Price100 = 22,
                     CategoryId = 4,
-                    ImageUrl = "",
                 },
                 new Product
                 {
@@ -138,7 +132,6 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price50 = 18,
                     Price100 = 17,
                     CategoryId = 7,
-                    ImageUrl = "",
                 },
                 new Product
                 {
@@ -152,7 +145,6 @@ namespace TheBookshelfWeb.DataAccess.Data
                     Price50 = 10,
                     Price100 = 9,
                     CategoryId = 8,
-                    ImageUrl = "",
                 }
                 );
         }

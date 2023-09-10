@@ -62,25 +62,25 @@ namespace TheBookshelfWeb.Areas.Admin.Controllers
                     //combine webroot path with folder with images path
                     string productPath = Path.Combine(wwwRootPath, @"images\product");
 
-                    if (!string.IsNullOrEmpty(productVM.Product.ImageUrl))
-                    {
-                        //Delete old image
-                        var oldImagePath = Path.Combine(wwwRootPath, productVM.Product.ImageUrl.TrimStart('\\'));
+                    //if (!string.IsNullOrEmpty(productVM.Product.ImageUrl))
+                    //{
+                    //    //Delete old image
+                    //    var oldImagePath = Path.Combine(wwwRootPath, productVM.Product.ImageUrl.TrimStart('\\'));
 
-                        if (System.IO.File.Exists(oldImagePath))
-                        {
-                            System.IO.File.Delete(oldImagePath);
-                        }
-                    }
+                    //    if (System.IO.File.Exists(oldImagePath))
+                    //    {
+                    //        System.IO.File.Delete(oldImagePath);
+                    //    }
+                    //}
 
-                    //create new file
-                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
-                    {
-                        file.CopyTo(fileStream);
-                    }
+                    ////create new file
+                    //using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
+                    //{
+                    //    file.CopyTo(fileStream);
+                    //}
 
-                    // assign image url to product view model
-                    productVM.Product.ImageUrl = @"\images\product\" + fileName;
+                    //// assign image url to product view model
+                    //productVM.Product.ImageUrl = @"\images\product\" + fileName;
                 }
 
                 if (productVM.Product.Id == 0)
@@ -121,12 +121,12 @@ namespace TheBookshelfWeb.Areas.Admin.Controllers
                 return Json(new { success = false, message = "Error while deleting" });
             }
 
-            var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, productToBeDeleted.ImageUrl.TrimStart('\\'));
+            //var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, productToBeDeleted.ImageUrl.TrimStart('\\'));
 
-            if (System.IO.File.Exists(oldImagePath))
-            {
-                System.IO.File.Delete(oldImagePath);
-            }
+            //if (System.IO.File.Exists(oldImagePath))
+            //{
+            //    System.IO.File.Delete(oldImagePath);
+            //}
 
             _unitOfWork.Product.Remove(productToBeDeleted);
             _unitOfWork.Save();

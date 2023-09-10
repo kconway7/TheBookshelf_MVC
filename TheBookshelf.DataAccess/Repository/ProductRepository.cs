@@ -27,10 +27,10 @@ namespace TheBookshelf.DataAccess.Repository
                 obj.ISBN = objFromDb.ISBN;
                 obj.CategoryId = objFromDb.CategoryId;
                 obj.Author = objFromDb.Author;
-                if (obj.ImageUrl != null)
-                {
-                    objFromDb.ImageUrl = obj.ImageUrl;
-                }
+                //if (obj.ImageUrl != null)
+                //{
+                //    objFromDb.ImageUrl = obj.ImageUrl;
+                //}
             }
         }
     }
