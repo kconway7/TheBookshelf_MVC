@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34004.107
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheBookshelfWebRazor_Temp", "TheBookshelfWebRazor_Temp\TheBookshelfWebRazor_Temp.csproj", "{B9C87D69-7159-4164-9F35-010FE0D2BF07}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheBookshelf.DataAccess", "TheBookshelf.DataAccess\TheBookshelf.DataAccess.csproj", "{C2B8ED2B-E9AE-4C3C-A552-E3A27189791D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheBookshelf.Models", "TheBookshelf.Models\TheBookshelf.Models.csproj", "{D9DD0405-3AE0-4839-A5B8-129C8482E26B}"
@@ -19,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B9C87D69-7159-4164-9F35-010FE0D2BF07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B9C87D69-7159-4164-9F35-010FE0D2BF07}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B9C87D69-7159-4164-9F35-010FE0D2BF07}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B9C87D69-7159-4164-9F35-010FE0D2BF07}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C2B8ED2B-E9AE-4C3C-A552-E3A27189791D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C2B8ED2B-E9AE-4C3C-A552-E3A27189791D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2B8ED2B-E9AE-4C3C-A552-E3A27189791D}.Release|Any CPU.ActiveCfg = Release|Any CPU

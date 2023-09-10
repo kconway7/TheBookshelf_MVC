@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Stripe;
+using TheBookshelf.DataAccess.DbInitializer;
 using TheBookshelf.DataAccess.Repository;
 using TheBookshelf.DataAccess.Repository.IRepository;
 using TheBookshelf.Utility;
@@ -24,25 +25,27 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkSto
 // Configure cookies must be added after identity is added
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = $"/Identity/Account/Login";
-    options.LogoutPath = $"/Identity/Account/Logout";
-    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+	options.LoginPath = $"/Identity/Account/Login";
+	options.LogoutPath = $"/Identity/Account/Logout";
+	options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
 });
 builder.Services.AddAuthentication().AddGoogle(option =>
 {
-    option.ClientId = "1098554166825-kvrqf7b365f0u5j73cmr1enk3uib9pm7.apps.googleusercontent.com";
-    option.ClientSecret = "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";
+	option.ClientId = "1098554166825-kvrqf7b365f0u5j73cmr1enk3uib9pm7.apps.googleusercontent.com";
+	option.ClientSecret = "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";
 });
 
 //Configure sessions
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(100);
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
+	options.IdleTimeout = TimeSpan.FromMinutes(100);
+	options.Cookie.HttpOnly = true;
+	options.Cookie.IsEssential = true;
 });
 
+//Seeding DB
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 
 // Added UnitOfWork Repository to Service
 builder.Services.AddRazorPages();
@@ -57,9 +60,9 @@ var app = builder.Build();
 //////////////////////////////////////
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+	app.UseExceptionHandler("/Home/Error");
+	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+	app.UseHsts();
 }
 
 app.UseHttpsRedirection();
@@ -70,11 +73,22 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseSession();
+SeedDatabase();
 
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
+	name: "default",
+	pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
 
 app.Run();
+
+
+void SeedDatabase()
+{
+	using (var scope = app.Services.CreateScope())
+	{
+		var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+		dbInitializer.Initialize();
+	}
+}

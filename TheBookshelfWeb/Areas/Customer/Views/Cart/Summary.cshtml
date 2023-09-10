@@ -117,7 +117,15 @@
 						</p>
 					</div>
 					<div class="col-12 col-md-4">
-						<button type="submit" value="Place Order" class="btn btn-primary rounded-2 form-control">Place Order</button>
+						@if (User.IsInRole(SD.Role_Admin))
+						{
+
+							<button type="submit" value="Place Order" disabled class="btn btn-primary rounded-2 form-control">Place Order</button>
+						}
+						else
+						{
+							<button type="submit" value="Place Order" class="btn btn-primary rounded-2 form-control">Place Order</button>
+						}
 					</div>
 				</div>
 			</div>
