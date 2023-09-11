@@ -23,10 +23,11 @@ namespace TheBookshelf.DataAccess.Repository
                 objFromDb.Price = obj.Price;
                 objFromDb.Price50 = obj.Price50;
                 objFromDb.Price100 = obj.Price100;
-                obj.ListPrice = objFromDb.ListPrice;
-                obj.ISBN = objFromDb.ISBN;
-                obj.CategoryId = objFromDb.CategoryId;
-                obj.Author = objFromDb.Author;
+                objFromDb.ListPrice = obj.ListPrice;
+                objFromDb.ISBN = obj.ISBN;
+                objFromDb.CategoryId = obj.CategoryId;
+                objFromDb.Author = obj.Author;
+                objFromDb.ProductImages = obj.ProductImages;
                 //if (obj.ImageUrl != null)
                 //{
                 //    objFromDb.ImageUrl = obj.ImageUrl;
